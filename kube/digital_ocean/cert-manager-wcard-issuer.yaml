@@ -1,21 +1,16 @@
 apiVersion: cert-manager.io/v1
-kind: Issuer
+kind: ClusterIssuer
 metadata:
-  name: letsencrypt-dev-wcard
-  namespace: backend
+  name: letsencrypt-gateway
 spec:
   acme:
     email: cosmedaniel8@gmail.com
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: letsencrypt-dev-wcard-private
-    # List of challenge solvers that will be used to solve ACME challenges for the matching domains.
+      name: letsencrypt-gateway-account-key
     solvers:
-    # Use the DigitalOcean DNS API to manage DNS-01 challenge records.
       - dns01:
           digitalocean:
-            # Kubernetes secret that contains the DO API token.
-            # Must be in the same namespace as the Issuer CRD.
             tokenSecretRef:
-              name: digitalocean-dns
+              name: digitalocean-token
               key: access-token
