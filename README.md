@@ -1,1 +1,1 @@
-Scripts to manage my Homelaba and Cloud Servers.
+Scripts to manage my Homelab and Cloud Servers.
