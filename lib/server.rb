@@ -11,7 +11,7 @@ class Server
     @fqdn = fqdn
   end
 
-  def tailscale_domain
+  def host
     "#{@hostname}.#{@fqdn}"
   end
 end

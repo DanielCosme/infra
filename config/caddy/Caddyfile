@@ -18,12 +18,12 @@ small.tech {
     file_server
 }
 
-# sync.danicos.me {
-#     reverse_proxy http://localhost:8384 {
-#         header_up Host {upstream_hostport}
-#     }
-# }
-# 
+sync.danicos.me {
+    reverse_proxy http://apex:8384 {
+        header_up Host {upstream_hostport}
+    }
+}
+
 # music.danicos.me {
 #     reverse_proxy http://ubi-prime:4533 {
 #         header_up Host {upstream_hostport}

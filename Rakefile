@@ -16,7 +16,7 @@ end
 
 desc 'install tailscale and add server to the tailnet'
 task :tailscale do
-  require_relative './tasks/install_tailscale'
+  require_relative './tasks/tailscale'
   install_tailscale
 end
 
@@ -57,4 +57,15 @@ end
 task :decrypt_secrets do
   require_relative './tasks/age'
   decrypt
+end
+
+task :install_syncthing do
+  require_relative './tasks/syncthing'
+  install_syncthing
+end
+
+# Locks ssh, only to be accessed via VPN (tailscale)
+task :lock_in_server do
+  require_relative './tasks/tailscale'
+  lock_in_server
 end

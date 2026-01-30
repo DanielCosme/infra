@@ -1,4 +1,0 @@
-[Allow tailscaled to manipulate DNS settings]
-Identity=unix-user:tailscaled
-Action=org.freedesktop.resolve1.*
-ResultAny=yes
