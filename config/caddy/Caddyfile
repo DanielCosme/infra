@@ -1,0 +1,49 @@
+{
+  email danicosme@proton.me
+  # debug
+}
+
+danicos.dev www.danicos.dev danicos.me www.danicos.me {
+    root * /var/www/homepage
+    file_server
+    # reverse_proxy localhost:443
+}
+
+ape.danicos.me {
+    reverse_proxy localhost:4000
+}
+
+small.tech {
+    root * /srv/http/small_tech
+    file_server
+}
+
+# sync.danicos.me {
+#     reverse_proxy http://localhost:8384 {
+#         header_up Host {upstream_hostport}
+#     }
+# }
+# 
+# music.danicos.me {
+#     reverse_proxy http://ubi-prime:4533 {
+#         header_up Host {upstream_hostport}
+#     }
+# }
+# 
+# book.danicos.me {
+#     reverse_proxy http://ubi-prime:80 {
+#         header_up Host {upstream_hostport}
+#     }
+# }
+# 
+# git.danicos.dev {
+#     reverse_proxy http://ubi-prime:3000 {
+#         header_up Host {upstream_hostport}
+#     }
+# }
+# 
+# todo.danicos.me {
+#     reverse_proxy http://localhost:3001 {
+#         header_up Host {upstream_hostport}
+#     }
+# }

@@ -1,0 +1,14 @@
+Include /etc/ssh/sshd_config.d/*.conf
+
+PermitRootLogin no
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+KbdInteractiveAuthentication no
+
+UsePAM yes
+
+PrintMotd no
+# Allow client to pass locale environment variables
+AcceptEnv LANG LC_*
+# override default of no subsystems
+Subsystem sftp /usr/lib/openssh/sftp-server
