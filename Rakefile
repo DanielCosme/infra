@@ -64,6 +64,16 @@ task :install_syncthing do
   install_syncthing
 end
 
+task :gitea_install do
+  require_relative './tasks/gitea'
+  install_gitea
+end
+
+task :gitea_update do
+  require_relative './tasks/gitea'
+  update_config
+end
+
 # Locks ssh, only to be accessed via VPN (tailscale)
 task :lock_in_server do
   require_relative './tasks/tailscale'

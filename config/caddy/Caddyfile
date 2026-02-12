@@ -9,13 +9,17 @@ danicos.dev www.danicos.dev danicos.me www.danicos.me {
     # reverse_proxy localhost:443
 }
 
+small.tech {
+    root * /srv/http/small_tech
+    file_server
+}
+
 ape.danicos.me {
     reverse_proxy localhost:4000
 }
 
-small.tech {
-    root * /srv/http/small_tech
-    file_server
+git.danicos.dev {
+    reverse_proxy http://apex:4001
 }
 
 sync.danicos.me {

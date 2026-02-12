@@ -9,6 +9,7 @@ TIMEZONE = 'America/Montreal'
 TAILSCALE_DOMAIN = 'orca-uaru.ts.net'
 SECRETS_PATH = './config/secrets'
 ENC_SECRETS_PATH = './config/enc'
+DATAPOOL_PATH = '/datapool'
 
 SERVERS = {
   ape0: Server.new(
