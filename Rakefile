@@ -74,6 +74,11 @@ task :gitea_update do
   update_config
 end
 
+task :gitea_install_runner do
+  require_relative './tasks/gitea'
+  gitea_install_runner
+end
+
 # Locks ssh, only to be accessed via VPN (tailscale)
 task :lock_in_server do
   require_relative './tasks/tailscale'

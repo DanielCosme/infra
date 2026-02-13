@@ -10,6 +10,7 @@ TAILSCALE_DOMAIN = 'orca-uaru.ts.net'
 SECRETS_PATH = './config/secrets'
 ENC_SECRETS_PATH = './config/enc'
 DATAPOOL_PATH = '/datapool'
+GIT_URL = 'https://git.danicos.dev'
 
 SERVERS = {
   ape0: Server.new(
