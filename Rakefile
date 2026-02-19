@@ -84,3 +84,18 @@ task :lock_in_server do
   require_relative './tasks/tailscale'
   lock_in_server
 end
+
+task :loki_install do
+  require_relative './tasks/loki'
+  loki_install
+end
+
+task :grafana_alloy_install do
+  require_relative './tasks/loki'
+  grafana_alloy_install
+end
+
+task :grafana_alloy_update do
+  require_relative './tasks/loki'
+  grafana_alloy_update_config
+end

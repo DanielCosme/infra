@@ -41,7 +41,7 @@ def gitea_install_runner
   ex.ssh_f("sudo mv /home/#{ADMIN}/act_runner.yaml /etc/act_runner/act_runner.yaml")
   ex.ssh_f('sudo chown act_runner:act_runner /etc/act_runner/act_runner.yaml')
 
-  # TODO: make sure to make this work with sudo -D /var/lib/act_runner via sudoers
+  # TODO: make sure I can register act_runner automatically. to make this work with sudo -D /var/lib/act_runner via sudoers
   #   arch ALL=(ALL) SETENV: /usr/bin/act_runner
   # ex.ssh_f("sudo  -u act_runner act_runner register --no-interactive --name daniel_runner --instance #{GIT_URL} --token #{GITEA_RUNNER_DANIEL_TOKEN}")
   # ex.ssh_f('sudo systemctl enable --now act_runner && sudo systemctl status act_runner')

@@ -1,0 +1,117 @@
+// Sample config for Alloy.
+//
+// For a full configuration reference, see https://grafana.com/docs/alloy
+logging {
+  level = "warn"
+}
+
+loki.source.journal "systemd" {
+  forward_to    = [loki.write.endpoint.receiver]
+  relabel_rules = loki.relabel.journal.rules
+  labels        = {component = "loki.source.journal"}
+  // Filter to specific services (example: only Gitea and Loki logs)
+  // matches = "_SYSTEMD_UNIT=gitea.service OR _SYSTEMD_UNIT=loki.service OR _SYSTEMD_UNIT=grafana.service OR _SYSTEMD_UNIT=caddy.service"
+}
+
+loki.relabel "journal" {
+  forward_to = []
+
+  rule {
+    source_labels = ["__journal__systemd_unit"]
+    target_label  = "unit"
+  }
+  rule {
+    source_labels = ["__journal__hostname"]
+    target_label  = "hostname"
+  }
+  rule {
+    source_labels = ["__journal__systemd_priority"]
+    target_label  = "level"
+  }
+  // Map priority numbers to descriptive names
+  rule {
+    source_labels = ["__journal__systemd_priority"]
+    regex = "0"
+    target_label = "level"
+    replacement = "emerg"
+  }
+  rule {
+    source_labels = ["__journal__systemd_priority"]
+    regex = "1"
+    target_label = "level"
+    replacement = "alert"
+  }
+  rule {
+    source_labels = ["__journal__systemd_priority"]
+    regex = "2"
+    target_label = "level"
+    replacement = "crit"
+  }
+  rule {
+    source_labels = ["__journal__systemd_priority"]
+    regex = "3"
+    target_label = "level"
+    replacement = "err"
+  }
+  rule {
+    source_labels = ["__journal__systemd_priority"]
+    regex = "4"
+    target_label = "level"
+    replacement = "warning"
+  }
+  rule {
+    source_labels = ["__journal__systemd_priority"]
+    regex = "5"
+    target_label = "level"
+    replacement = "notice"
+  }
+  rule {
+    source_labels = ["__journal__systemd_priority"]
+    regex = "6"
+    target_label = "level"
+    replacement = "info"
+  }
+  rule {
+    source_labels = ["__journal__systemd_priority"]
+    regex = "7"
+    target_label = "level"
+    replacement = "debug"
+  }
+  // Optional: Filter out noisy kernel messages if desired
+  rule {
+    source_labels = ["__journal__systemd_unit"]
+    regex = "kernel"
+    action = "drop"
+  }
+}
+
+loki.write "endpoint" {
+  endpoint {
+    url ="http://apex:3100/loki/api/v1/push"
+  }
+}
+
+// prometheus.exporter.unix "default" {
+//   include_exporter_metrics = true
+//   disable_collectors       = ["mdadm"]
+// }
+
+// Collector:   loki.source.journal
+// Transformer: loki.process
+// Writer:      loki.write
+
+// prometheus.scrape "default" {
+//   targets = array.concat(
+//     prometheus.exporter.unix.default.targets,
+//     [{
+//       // Self-collect metrics
+//       job         = "alloy",
+//       __address__ = "127.0.0.1:12345",
+//     }],
+//   )
+// 
+//   forward_to = [
+//   // TODO: components to forward metrics to (like prometheus.remote_write or
+//   // prometheus.relabel).
+//   ]
+// }
