@@ -99,3 +99,18 @@ task :grafana_alloy_update do
   require_relative './tasks/loki'
   grafana_alloy_update_config
 end
+
+task :prometheus_install do
+  require_relative './tasks/prometheus'
+  prometheus_install
+end
+
+task :prometheus_install_node do
+  require_relative './tasks/prometheus'
+  prometheus_install_node_exporter
+end
+
+task :prometheus_update do
+  require_relative './tasks/prometheus'
+  prometheus_update_config
+end

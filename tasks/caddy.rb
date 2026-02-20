@@ -16,5 +16,5 @@ end
 def update_caddyfile
   ex = RemoteExecutor.new(SERVER.hostname, ADMIN)
   ex.scp(from: './config/caddy/Caddyfile', to: "/home/#{ADMIN}/Caddyfile")
-  ex.ssh_f('sudo mv ~/Caddyfile /etc/caddy/Caddyfile && sudo systemctl restart caddy')
+  ex.ssh_f('sudo mv ~/Caddyfile /etc/caddy/Caddyfile && sudo systemctl restart caddy && sudo systemctl status caddy')
 end

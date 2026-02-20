@@ -9,8 +9,26 @@ loki.source.journal "systemd" {
   forward_to    = [loki.write.endpoint.receiver]
   relabel_rules = loki.relabel.journal.rules
   labels        = {component = "loki.source.journal"}
-  // Filter to specific services (example: only Gitea and Loki logs)
-  // matches = "_SYSTEMD_UNIT=gitea.service OR _SYSTEMD_UNIT=loki.service OR _SYSTEMD_UNIT=grafana.service OR _SYSTEMD_UNIT=caddy.service"
+}
+
+loki.write "endpoint" {
+  endpoint {
+    url = "http://apex:3100/loki/api/v1/push"
+  }
+}
+
+prometheus.exporter.unix "local_system" {}
+
+prometheus.remote_write "remote" {
+  endpoint {
+    url = "http://apex:9090/api/v1/write"
+  }
+}
+
+prometheus.scrape "node_metrics" {
+  targets = prometheus.exporter.unix.local_system.targets
+  forward_to = [prometheus.remote_write.remote.receiver]
+  scrape_interval = "10s"
 }
 
 loki.relabel "journal" {
@@ -85,33 +103,3 @@ loki.relabel "journal" {
   }
 }
 
-loki.write "endpoint" {
-  endpoint {
-    url ="http://apex:3100/loki/api/v1/push"
-  }
-}
-
-// prometheus.exporter.unix "default" {
-//   include_exporter_metrics = true
-//   disable_collectors       = ["mdadm"]
-// }
-
-// Collector:   loki.source.journal
-// Transformer: loki.process
-// Writer:      loki.write
-
-// prometheus.scrape "default" {
-//   targets = array.concat(
-//     prometheus.exporter.unix.default.targets,
-//     [{
-//       // Self-collect metrics
-//       job         = "alloy",
-//       __address__ = "127.0.0.1:12345",
-//     }],
-//   )
-// 
-//   forward_to = [
-//   // TODO: components to forward metrics to (like prometheus.remote_write or
-//   // prometheus.relabel).
-//   ]
-// }

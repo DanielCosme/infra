@@ -1,6 +1,8 @@
 {
   email danicosme@proton.me
   # debug
+  metrics
+  admin 0.0.0.0:2019
 }
 
 danicos.dev www.danicos.dev danicos.me www.danicos.me {
