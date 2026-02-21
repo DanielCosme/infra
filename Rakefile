@@ -129,3 +129,18 @@ task :caddy_validate do
   require_relative './tasks/caddy'
   caddy_validate
 end
+
+task :pg_install do
+  require_relative './tasks/postgres'
+  pg_install
+end
+
+task :pg_setup_apex do
+  require_relative './tasks/postgres'
+  pg_setup
+end
+
+task :pg_setup_dbs do
+  require_relative './tasks/postgres'
+  pg_setup_databases
+end

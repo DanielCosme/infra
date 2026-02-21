@@ -11,6 +11,7 @@ SECRETS_PATH = './config/secrets'
 ENC_SECRETS_PATH = './config/enc'
 DATAPOOL_PATH = '/datapool'
 GIT_URL = 'https://git.danicos.dev'
+APEX_BTRFS_DEVICE = '/dev/sdd'
 
 SERVERS = {
   ape0: Server.new(

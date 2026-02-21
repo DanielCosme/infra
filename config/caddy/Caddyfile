@@ -35,17 +35,17 @@ git.danicos.dev {
 }
 
 # ui
-temporalui.danicos.dev {
-	reverse_proxy apex:8233 {
-		header_up Upgrade {http.request.header.Upgrade}
-		header_up Connection {http.request.header.Connection}
-	}
-}
+# temporalui.danicos.dev {
+# 	reverse_proxy apex:8233 {
+# 		header_up Upgrade {http.request.header.Upgrade}
+# 		header_up Connection {http.request.header.Connection}
+# 	}
+# }
 
 # server
-temporal.danicos.dev:7233 {
-	reverse_proxy h2c://localhost:7236
-}
+# temporal.danicos.dev:7233 {
+# 	reverse_proxy h2c://localhost:7236
+# }
 
 # music.danicos.me {
 #     reverse_proxy http://ubi-prime:4533 {
