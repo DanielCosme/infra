@@ -1,33 +1,50 @@
 {
-  email danicosme@proton.me
-  # debug
-  metrics
-  admin 0.0.0.0:2019
+	email danicosme@proton.me
+	# debug
+	metrics
+	admin 0.0.0.0:2019
 }
 
 danicos.dev www.danicos.dev danicos.me www.danicos.me {
-    root * /var/www/homepage
-    file_server
-    # reverse_proxy localhost:443
+	root * /var/www/homepage
+	file_server
 }
 
 small.tech {
-    root * /srv/http/small_tech
-    file_server
+	root * /srv/http/small_tech
+	file_server
 }
 
 ape.danicos.me {
-    reverse_proxy localhost:4000
-}
-
-git.danicos.dev {
-    reverse_proxy http://apex:4001
+	reverse_proxy localhost:4000
 }
 
 sync.danicos.me {
-    reverse_proxy http://apex:8384 {
-        header_up Host {upstream_hostport}
-    }
+	reverse_proxy http://apex:8384 {
+		header_up Host {upstream_hostport}
+	}
+}
+
+git.danicos.dev {
+	@badbots {
+		header From *openai.com*
+		header User-Agent *GPTBot*
+	}
+	abort @badbots
+	reverse_proxy http://apex:4001
+}
+
+# ui
+temporalui.danicos.dev {
+	reverse_proxy apex:8233 {
+		header_up Upgrade {http.request.header.Upgrade}
+		header_up Connection {http.request.header.Connection}
+	}
+}
+
+# server
+temporal.danicos.dev:7233 {
+	reverse_proxy h2c://localhost:7236
 }
 
 # music.danicos.me {
@@ -38,18 +55,6 @@ sync.danicos.me {
 # 
 # book.danicos.me {
 #     reverse_proxy http://ubi-prime:80 {
-#         header_up Host {upstream_hostport}
-#     }
-# }
-# 
-# git.danicos.dev {
-#     reverse_proxy http://ubi-prime:3000 {
-#         header_up Host {upstream_hostport}
-#     }
-# }
-# 
-# todo.danicos.me {
-#     reverse_proxy http://localhost:3001 {
 #         header_up Host {upstream_hostport}
 #     }
 # }

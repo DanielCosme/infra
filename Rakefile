@@ -114,3 +114,18 @@ task :prometheus_update do
   require_relative './tasks/prometheus'
   prometheus_update_config
 end
+
+task :temporal_install do
+  require_relative './tasks/temporal'
+  temporal_install
+end
+
+task :temporal_update do
+  require_relative './tasks/temporal'
+  update_configuration
+end
+
+task :caddy_validate do
+  require_relative './tasks/caddy'
+  caddy_validate
+end

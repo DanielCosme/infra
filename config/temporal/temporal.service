@@ -1,0 +1,11 @@
+[Unit]
+Description=Temporal Service
+After=network.target
+
+[Service]
+User=temporal
+Group=temporal
+ExecStart=/usr/local/sbin/temporal-server -r / -c etc/temporal/ -e temporal-server start
+
+[Install]
+WantedBy=multi-user.target

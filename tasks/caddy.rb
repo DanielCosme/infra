@@ -14,7 +14,16 @@ def install_caddy
 end
 
 def update_caddyfile
+  caddy_validate
   ex = RemoteExecutor.new(SERVER.hostname, ADMIN)
   ex.scp(from: './config/caddy/Caddyfile', to: "/home/#{ADMIN}/Caddyfile")
   ex.ssh_f('sudo mv ~/Caddyfile /etc/caddy/Caddyfile && sudo systemctl restart caddy && sudo systemctl status caddy')
+end
+
+def caddy_validate
+  system('caddy fmt --overwrite --config ./config/caddy/Caddyfile')
+  raise "caddy fmt failed with exit code #{$?.exitstatus}" unless $?.success?
+
+  system('caddy validate --config ./config/caddy/Caddyfile')
+  raise "caddy validate failed with exit code #{$?.exitstatus}" unless $?.success?
 end

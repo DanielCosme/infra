@@ -1,0 +1,11 @@
+[Unit]
+Description=Temporal UI Server
+After=network.target
+
+[Service]
+User=temporal
+Group=temporal
+ExecStart=/usr/local/sbin/temporal-ui -r / -c etc/temporal/ -e temporal-ui-server start
+
+[Install]
+WantedBy=multi-user.target
