@@ -22,8 +22,8 @@ end
 
 def caddy_validate
   system('caddy fmt --overwrite --config ./config/caddy/Caddyfile')
-  raise "caddy fmt failed with exit code #{$?.exitstatus}" unless $?.success?
+  abort "caddy fmt failed with exit code #{$?.exitstatus}" unless $?.success?
 
   system('caddy validate --config ./config/caddy/Caddyfile')
-  raise "caddy validate failed with exit code #{$?.exitstatus}" unless $?.success?
+  abort "caddy validate failed with exit code #{$?.exitstatus}" unless $?.success?
 end

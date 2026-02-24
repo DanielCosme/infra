@@ -38,7 +38,7 @@ def pg_setup_databases
                  "sudo -u #{PG} psql -c \"CREATE USER #{v.user} WITH PASSWORD '#{v.password}';\"",
                  "sudo -u #{PG} psql -c \"CREATE DATABASE #{v.db};\"",
                  "sudo -u #{PG} psql -c \"GRANT ALL PRIVILEGES ON DATABASE #{v.db} TO #{v.user};\"",
-                 "sudo -u #{PG} psql -c \"ALTER DATABASE #{v.db} OWNER TO #{v.user}\" "
+                 "sudo -u #{PG} psql -c \"ALTER DATABASE #{v.db} OWNER TO #{v.user}\""
                ])
     puts ''
   end
