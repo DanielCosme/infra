@@ -1,0 +1,28 @@
+- hosts: fedora
+  become: true
+  tasks:
+    - name: Enable and start firewalld service
+      ansible.builtin.systemd:
+        name: firewalld
+        state: started
+        enabled: true
+
+    - name: Ensure firewalld is enabled and active
+      ansible.posix.firewalld:
+        state: enabled
+        permanent: true
+        immediate: true
+
+    - name: Remove all existing rules and set default zone policy to deny
+      ansible.posix.firewalld:
+        zone: public
+        state: disabled
+        permanent: true
+
+    - name: Allow SSH (port 22) in the public zone
+      ansible.posix.firewalld:
+        service: ssh
+        zone: public
+        state: enabled
+        permanent: true
+        immediate: true

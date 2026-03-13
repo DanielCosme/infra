@@ -5,6 +5,8 @@ require 'net/scp'
 
 # RemoteExecutor
 class RemoteExecutor
+  attr_reader :user
+
   def initialize(host, user, opts = {})
     @host = host
     @user = user
@@ -32,6 +34,15 @@ class RemoteExecutor
       ok = scp.upload!(from, to)
       abort 'upload failed' unless ok
     end
+  end
+
+  def scp_root(from:, to:)
+    puts "coping #{from} to #{to}"
+    scp(from: from, to: '/tmp/tmp_1')
+    ssh_seq_f([
+                "sudo mv /tmp/tmp_1 #{to}",
+                "sudo chown root:root #{to}"
+              ])
   end
 
   private

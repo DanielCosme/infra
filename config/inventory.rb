@@ -4,6 +4,7 @@ require_relative '../lib/server'
 
 USER = 'daniel'
 ADMIN = 'arch'
+FEDORA_ADMIN = 'fedora'
 TIMEZONE = 'America/Montreal'
 
 TAILSCALE_DOMAIN = 'orca-uaru.ts.net'
@@ -24,12 +25,19 @@ SERVERS = {
     ip: '10.0.0.59', # Must be in the local network for this IP to work. For the rest of operations, Tailscale is used.
     hostname: 'apex',
     fqdn: TAILSCALE_DOMAIN
+  ),
+  charlie: Server.new(
+    ip: '148.113.201.167',
+    hostname: 'charlie',
+    is_public: true,
+    fqdn: TAILSCALE_DOMAIN
   )
 }.freeze
 
 SERVER_LIST = [
   SERVERS[:ape0],
-  SERVERS[:apex]
+  SERVERS[:apex],
+  SERVERS[:charlie]
 ].freeze
 
 SERVER = SERVERS[:ape0]

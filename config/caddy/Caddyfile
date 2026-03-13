@@ -5,7 +5,7 @@
 	admin 0.0.0.0:2019
 }
 
-danicos.dev www.danicos.dev danicos.me www.danicos.me {
+danicos.me www.danicos.me {
 	root * /var/www/homepage
 	file_server
 }
@@ -19,20 +19,20 @@ ape.danicos.me {
 	reverse_proxy localhost:4000
 }
 
-sync.danicos.me {
-	reverse_proxy http://apex:8384 {
-		header_up Host {upstream_hostport}
-	}
-}
+# sync.danicos.me {
+# 	reverse_proxy http://apex:8384 {
+# 		header_up Host {upstream_hostport}
+# 	}
+# }
 
-git.danicos.dev {
-	@badbots {
-		header From *openai.com*
-		header User-Agent *GPTBot*
-	}
-	abort @badbots
-	reverse_proxy http://apex:4001
-}
+# git.danicos.dev {
+# 	@badbots {
+# 		header From *openai.com*
+# 		header User-Agent *GPTBot*
+# 	}
+# 	abort @badbots
+# 	reverse_proxy http://apex:4001
+# }
 
 # ui
 # temporalui.danicos.dev {

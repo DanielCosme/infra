@@ -1,0 +1,13 @@
+- hosts: fedora
+  become: true
+  tasks:
+    - name: Install base packages
+      dnf:
+        state: latest
+        name:
+          - vim
+          - fish
+          - btop
+          - rsync
+          - firewalld
+          - python3-firewall

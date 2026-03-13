@@ -1,0 +1,12 @@
+- hosts: charlie
+  become: true
+  roles:
+    - role: artis3n.tailscale.machine
+      vars:
+        tailscale_authkey: ""
+        tailscale_oauth_ephemeral: false
+        tailscale_oauth_preauthorized: true
+# sudo firewall-cmd --permanent --zone=home --add-interface=tailscale0
+# sudo firewall-cmd --permanent --zone=home --add-service=ssh
+# sudo firewall-cmd --permanent --zone=public --remove-service=ssh
+# sudo firewall-cmd --reload

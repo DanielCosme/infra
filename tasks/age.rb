@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# Encodde secrets
-# Decode secrets
 require_relative '../config/inventory'
 
 def encrypt
