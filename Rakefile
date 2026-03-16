@@ -149,13 +149,3 @@ task :k3s_install do
   require_relative './tasks/k3s'
   k3s_install
 end
-
-task :apply do
-  puts `go run .`
-  puts `kubectl apply -f ./kubernetes/gitea/namespace.yaml`
-  puts `kubectl apply -f ./kubernetes/gitea`
-end
-
-task :unapply do
-  puts `kubectl delete -f ./kubernetes/gitea/namespace.yaml`
-end

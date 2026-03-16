@@ -1,0 +1,9 @@
+mirrors:
+  docker.io:
+    endpoint:
+      - "https://danicos.dev"
+configs:
+  danicos.dev:
+    auth:
+      username: "daniel"
+      password: ""
