@@ -24,12 +24,23 @@ SERVERS = {
     hostname: 'charlie',
     is_public: true,
     fqdn: TAILSCALE_DOMAIN
+  ),
+  hydra0: Server.new(
+    ip: '10.0.0.171',
+    hostname: 'hydra-0',
+    is_public: false,
+    fqdn: TAILSCALE_DOMAIN
   )
 }.freeze
 
 SERVER_LIST = [
   SERVERS[:apexnas],
-  SERVERS[:charlie]
+  SERVERS[:charlie],
+  SERVERS[:hydra0]
 ].freeze
 
-SERVER = SERVERS[:charlie]
+HYDRA_CLUSTER = [
+  SERVERS[:hydra0]
+]
+
+SERVER = SERVERS[:hydra0]
