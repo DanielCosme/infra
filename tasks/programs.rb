@@ -2,6 +2,7 @@
 
 require_relative '../config/inventory'
 require_relative '../lib/ssh'
+require_relative '../lib/server'
 
 def ensure_installed
   programs = {
@@ -19,9 +20,13 @@ end
 
 def update
   SERVER_LIST.each do |s|
-    ex = RemoteExecutor.new(s.tailscale_domain, ADMIN)
-    puts "Updating: #{s.tailscale_domain}"
-    ex.ssh_f('sudo pacman --noconfirm -Syu')
-    puts ''
+    if s.os == OS::ARCH_LINUX
+      ex = RemoteExecutor.new(s.tailscale_domain, ADMIN)
+      puts "Updating: #{s.tailscale_domain}"
+      ex.ssh_f('sudo pacman --noconfirm -Syu')
+      puts ''
+    else
+      puts "#{s.os}: not configured"
+    end
   end
 end
