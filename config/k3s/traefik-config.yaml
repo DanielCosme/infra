@@ -6,10 +6,18 @@ metadata:
   namespace: kube-system
 spec:
   valuesContent: |-
+    providers:
+      kubernetesIngress:
+        allowExternalNameServices: true
+        allowEmptyServices: true
+      kubernetesCRD:
+        allowExternalNameServices: true
+        allowEmptyServices: true
     additionalArguments:
       - "--certificatesresolvers.default.acme.email=danicosme@proton.me"
       - "--certificatesresolvers.default.acme.storage=/data/acme.json"
       - "--certificatesresolvers.default.acme.httpchallenge.entrypoint=web"
+      - "--log.level=WARN"
     dashboard:
       enabled: true
     api:
