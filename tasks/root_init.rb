@@ -53,6 +53,10 @@ def root_init(password = '..')
                "cp ~/.ssh/authorized_keys /home/#{USER}/.ssh/authorized_keys && chown -R #{USER}:#{USER} /home/#{USER}/.ssh"
              ])
 
+  ex.ssh_seq([
+	  "mkdir -p /home/#{USER}/.config/fish/functions",
+	  "chown -R #{USER}:#{USER} /home/#{USER}/.config"
+  ])
   ex.scp(from: './config/fish/fish_user_key_bindings.fish',
          to: "/home/#{USER}/.config/fish/functions/fish_user_key_bindings.fish")
   ex.scp(from: './config/fish/config.fish',

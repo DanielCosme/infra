@@ -14,7 +14,8 @@ GIT_URL = 'https://git.danicos.dev'
 
 SERVERS = {
   apexnas: Server.new(
-    ip: '10.0.0.57', # LAN IP
+    # ip: '10.0.0.57', # LAN IP
+    ip: '100.108.181.60', # Tailscale IP
     hostname: 'apex-truenas',
     is_public: false,
     fqdn: TAILSCALE_DOMAIN,
@@ -28,9 +29,25 @@ SERVERS = {
     os: OS::FEDORA
   ),
   hydra0: Server.new(
-    # ip: '10.0.0.171',
+    # ip: '10.0.0.171', # LAN IP
     ip: '100.93.39.59', # Tailscale IP
     hostname: 'hydra-0',
+    is_public: false,
+    fqdn: TAILSCALE_DOMAIN,
+    os: OS::ARCH_LINUX
+  ),
+  hydra1: Server.new(
+    # ip: '10.0.0.139', # LAN IP
+    ip: '100.85.36.24', # Tailscale IP
+    hostname: 'hydra-1',
+    is_public: false,
+    fqdn: TAILSCALE_DOMAIN,
+    os: OS::ARCH_LINUX
+  ),
+  hydra2: Server.new(
+    # ip: '10.0.0.58', # LAN IP
+    ip: '100.83.244.103 ', # Tailscale IP
+    hostname: 'hydra-2',
     is_public: false,
     fqdn: TAILSCALE_DOMAIN,
     os: OS::ARCH_LINUX
@@ -40,11 +57,15 @@ SERVERS = {
 SERVER_LIST = [
   SERVERS[:apexnas],
   SERVERS[:charlie],
-  SERVERS[:hydra0]
+  SERVERS[:hydra0],
+  SERVERS[:hydra1],
+  SERVERS[:hydra2],
 ].freeze
 
 HYDRA_CLUSTER = [
-  SERVERS[:hydra0]
+  SERVERS[:hydra0],
+  SERVERS[:hydra1],
+  SERVERS[:hydra2],
 ].freeze
 
-SERVER = SERVERS[:hydra0]
+SERVER = SERVERS[:hydra2]
