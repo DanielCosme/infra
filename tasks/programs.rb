@@ -30,3 +30,14 @@ def update
     end
   end
 end
+
+def iscsi
+  # This is needed for Longhorn (in Kubernetes) to work.
+  HYDRA_CLUSTER.each do |s|
+    ex = RemoteExecutor.new(s.hostname, ADMIN)
+    ex.ssh_seq_f([
+                   'sudo pacman --noconfirm -S open-iscsi',
+                   'sudo systemctl enable --now iscsid.service'
+                 ])
+  end
+end

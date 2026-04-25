@@ -38,6 +38,12 @@ task :programs do
   ensure_installed
 end
 
+desc 'ensures the programs in the list are installed'
+task :iscsi do
+  require_relative './tasks/programs'
+  iscsi
+end
+
 desc 'update all servers'
 task :update do
   require_relative './tasks/programs'
