@@ -36,7 +36,7 @@ def iscsi
   HYDRA_CLUSTER.each do |s|
     ex = RemoteExecutor.new(s.hostname, ADMIN)
     ex.ssh_seq_f([
-                   'sudo pacman --noconfirm -S open-iscsi',
+                   'sudo pacman --noconfirm -S open-iscsi nfs-utils',
                    'sudo systemctl enable --now iscsid.service'
                  ])
   end
