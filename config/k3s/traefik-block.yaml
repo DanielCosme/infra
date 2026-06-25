@@ -1,0 +1,17 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: block-openai-xai
+  namespace: gitea # Change to your Gitea namespace
+spec:
+  plugin:
+    blockuseragent:
+      regex:
+        - "(?i)openai"
+        - "(?i)xai"
+        - "(?i)chatgpt"
+        - "(?i)gptbot"
+        - "(?i)anthropic"
+        - "(?i)anthropic"
+        - "(?i)claude" # Add more as needed
+        - "(?i)amazonbot"
