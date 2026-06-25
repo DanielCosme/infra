@@ -12,6 +12,6 @@ spec:
         - "(?i)chatgpt"
         - "(?i)gptbot"
         - "(?i)anthropic"
-        - "(?i)anthropic"
         - "(?i)claude" # Add more as needed
         - "(?i)amazonbot"
+        - "(?i)bot"
