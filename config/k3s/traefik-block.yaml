@@ -15,3 +15,5 @@ spec:
         - "(?i)claude" # Add more as needed
         - "(?i)amazonbot"
         - "(?i)bot"
+        - "(?i)connect-go"
+        - "(?i)go-git"
